@@ -31,9 +31,11 @@ int main()
 {
     constexpr auto arraySize = 100;
     int* v = nullptr;
+
     // create and reverse the vector of LEN numbers
-    reverse(v, 1000);
     v = createAndFillVector(arraySize);
+    reverse(v, 100);
+    
 
     // check if the revert worked:
     const bool isReversed = std::is_sorted(v, v + arraySize, std::greater {});
