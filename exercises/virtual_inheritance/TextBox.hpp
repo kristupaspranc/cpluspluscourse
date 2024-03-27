@@ -5,12 +5,13 @@
 class Drawable {
 public:
     Drawable(int id);
-    void draw() const;
+    Drawable() = default;
+    virtual void draw() const;
 private:
     int m_id;
 };
 
-class Rectangle : public Drawable {
+class Rectangle : public virtual Drawable {
 public:
     Rectangle(int id, float width, float height);
 protected:
@@ -18,7 +19,7 @@ protected:
     float m_height;
 };
 
-class Text : public Drawable {
+class Text : public virtual Drawable {
 public:
     Text(int id, const std::string &content);
 protected:
@@ -28,5 +29,5 @@ protected:
 class TextBox : public Rectangle, public Text {
 public:
     TextBox(const std::string &content,
-            float width, float height);
+            float width, float height, int smth);
 };
