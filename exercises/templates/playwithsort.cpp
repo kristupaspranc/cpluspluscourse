@@ -38,6 +38,18 @@ int main() {
     std::cout << "\n\n";
 
     // TODO: Demonstrate OrderedVector with Complex as element type similar to above
+    std::cout << "Complex\n";
+    OrderedVector<Complex> vc(3);
+    vc.add(Complex{1,1});
+    vc.add(Complex{2,2});
+    vc.add(Complex{3,3});
+    for (int i =0; i < 3; i++){
+        std::cout << vc[i] << "\n";
+    }
+
+    // TODO: Bonus. Order complex of complex.
+    Complex_t<Complex> a{Complex{1,2},Complex{3,4}};
+    std::cout << a << "\n";
 
 
     // TODO: Extend OrderedVector to allow to customize the ordering via an additional template paramter.
