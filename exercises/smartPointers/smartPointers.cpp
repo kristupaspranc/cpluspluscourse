@@ -8,6 +8,7 @@
 #include <numeric>
 #include <span>
 #include <vector>
+#include <memory>
 
 
 /*
@@ -54,11 +55,11 @@ double sumEntries(std::span<double const> range) {
 // wrong and we didn't use smart pointers.
 // Understand and fix the memory leak.
 void doStuffWithData() {
-    auto data = new std::array<double, 10000>{};
-
+    // auto data = new std::array<double, 10000>{};
+    auto data = std::make_unique<std::array<double, 10000>>();
     sumEntries(*data);
 
-    delete data;
+    // delete data;
 }
 
 
@@ -93,8 +94,8 @@ struct LargeObject {
 };
 
 // A factory function to create large objects.
-LargeObject* createLargeObject() {
-    auto object = new LargeObject();
+std::unique_ptr<LargeObject> createLargeObject() {
+    auto object = std::make_unique<LargeObject>();
     // Imagine there is more setup steps of "object" here
     // ...
 
@@ -108,11 +109,11 @@ void changeLargeObject(LargeObject& object) {
 }
 
 void problem2() {
-    std::vector<LargeObject*> largeObjects;
+    std::vector<std::unique_ptr<LargeObject>> largeObjects;
 
     for (unsigned int i=0; i < 10; ++i) {
         auto newObj = createLargeObject();
-        largeObjects.push_back(newObj);
+        largeObjects.push_back(std::move(newObj));
     }
 
     for (const auto& obj : largeObjects) {
@@ -329,7 +330,7 @@ void problem4_2() {
 
 
 int main() {
-    problem1();
+    // problem1();
     // problem2();
     // problem3();
     // problem4_1();
