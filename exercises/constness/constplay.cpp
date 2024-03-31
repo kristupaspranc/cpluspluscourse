@@ -24,7 +24,7 @@ void read(const int* a) {
     [[maybe_unused]] int val = *a;
 }
 void read(int const & a) {
-    [[maybe_unused]] int val = a = 2;
+    [[maybe_unused]] int val = a;
 }
 
 struct Test {
@@ -40,18 +40,18 @@ int main() {
     // try pointer to constant
     int a = 1, b = 2;
     int const *i = &a;
-    *i = 5;
+    // *i = 5;
     i = &b;
 
     // try constant pointer
     int * const j = &a;
     *j = 5;
-    j = &b;
+    // j = &b;
 
     // try constant pointer to constant
     int const * const k = &a;
-    *k = 5;
-    k = &b;
+    // *k = 5;
+    // k = &b;
 
     // try constant arguments of functions
     int l = 0;
@@ -65,19 +65,19 @@ int main() {
     {
       int *p = 0;
       const int *r = 0;
-      write(p);
-      write(r);
-      read(p);
-      read(r);
+    //   write(p);
+    //   write(r);
+    //   read(p);
+    //   read(r);
     }
 
     // try constant arguments of functions with references
     {
       int p = 0;
       const int r = 0;
-      write(2);
-      write(r);
-      read(2);
+      write(p);
+    //   write(r);
+      read(p);
       read(r);
     }
 
@@ -86,7 +86,7 @@ int main() {
     const Test tc;
     std::string s("World");
     t.hello(s);
-    tc.hello(s);
+    // tc.hello(s);
     t.helloConst(s);
     tc.helloConst(s);
 
